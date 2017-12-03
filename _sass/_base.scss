@@ -7,8 +7,10 @@ html, body {
 }
 
 body {
-  background-color: black;
-
+  // background-color: $background-color;
+  background-image: url("../img/" + $background-image);
+  background-repeat: repeat;
+  // background-size: contain;
 }
 
 .container {
@@ -20,8 +22,15 @@ body {
   justify-content: space-around;
 
   .circular {
-    padding-top: 5%;
-    padding-bottom: 5%;
+
+    background-image: url("../circular_img/" + $circular-background-image);
+    background-repeat: repeat-y;
+    background-size: contain;
+
+    box-shadow: 0px 0px 40px #18021f;
+
+    margin-top: 5%;
+    margin-bottom: 5%;
     width: 80%;
 
     display: flex;
@@ -34,17 +43,36 @@ body {
 
     div {
       width: 100%;
-      background-color: magenta;
+      // background-color: magenta;
     }
 
     img {
       width: 100%;
-      // height: 100%;
+      vertical-align: top;
     }
 
     .top-matter, .bottom-matter {
       display: grid;
       grid-template-columns: 1fr 1fr;
+
+      .top-left {
+        img {
+          height: 100%;
+        }
+      }
+
+      .top-right {
+        position: relative;
+        width: 100%;
+        #week-overlay {
+          position: absolute;
+          width: 89.9%;
+          bottom: 0.5%;
+          left: 4.85%;
+          // right: 5.065%;
+          opacity: 1.0;
+        }
+      }
     }
 
     .middle-matter {
@@ -54,11 +82,15 @@ body {
       .shop-column {
         display: flex;
         flex-direction: column;
+        img {
+          cursor: pointer;
+        }
       }
 
       .middle-column {
+        background: white;
         img {
-          height: 100%;
+          // height: 100%;
         }
       }
     }
@@ -67,23 +99,69 @@ body {
 
 .floater {
   position: fixed;
-  top: 0;
-  left: 0;
-  border: 4px green solid;
+  top: 5vh;
+  right: 5vw;
+  border: 0px black solid;
+
+  box-shadow: 10px 10px 40px #000;
 
   .drag-bar {
-    background-color: green;
-    height: 20px;
+    background-color: white;
+    box-sizing: border-box;
+    // border: 1px black solid;
+    border-top: 10px #333 solid;
+    height: 30px;
     width: 100%;
+
+    .close {
+      cursor: pointer;
+      float: right;
+      padding-top: 7px;
+      padding-right: 10px;
+    }
   }
 
   .floater-content {
     padding: 20px;
+    background-color: white;
+
+    img {
+      width: 100%;
+    }
   }
 }
 
 .order-form {
   width: 300px;
-  background-color: white;
+  font-size: 14px;
 
+  #order-table {
+    table-layout: fixed;
+    width: 100%;
+    text-align: left;
+
+    tr {
+      &:first-child {
+        td {
+          padding-bottom: 10px;
+        }
+      }
+      &:last-child {
+        td {
+          padding-top: 10px;
+        }
+      }
+      td {
+        input {
+          display:table-cell;
+          width: 100%;
+        }
+        padding-right: 5px;
+      }
+    }
+  }
+
+  .order {
+    float: right;
+  }
 }
