@@ -1,0 +1,54 @@
+---
+hide_body: true
+fields:
+- name: name
+  label: Name
+  type: text
+  hidden: false
+  default: ''
+  config:
+    required: true
+- type: number
+  label: Cost
+  name: cost
+  config:
+    min: '0.00'
+    step: ".01"
+    required: true
+  default: '0.07'
+- name: ad_image
+  label: Ad image
+  type: file
+  hidden: false
+  default: ''
+- name: image
+  label: Image
+  type: file
+  hidden: false
+  default: ''
+- type: number
+  name: item_id
+  label: Item ID
+  config:
+    required: true
+    min: '0'
+    step: '1'
+  default: '3'
+  description: Must be unique for each item.
+- type: select
+  name: column
+  config:
+    source:
+      type: simple
+    required: true
+    options:
+    - left
+    - right
+  label: Column
+  default: left
+- type: number
+  name: order
+  label: Order
+  description: Ordering in each column
+  config:
+    required: true
