@@ -57,7 +57,7 @@ $(function() {
 
         var content = document.createElement('div');
         $(content).addClass('floater-content')
-          .html('<img src="item_img/' + item_img + '">')
+          .html('<img src="' + item_img + '">')
           .appendTo(floater);
 
         $(close).click(function() {

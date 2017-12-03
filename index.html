@@ -14,7 +14,7 @@ layout: default
       </div>
       <div class="top-right">
         {{site.data.weekly_background}}
-        <img src="circular_img/{{site.data.settings.weekly_background}}">
+        <img src="{{site.data.settings.weekly_background}}">
         <div id="week-overlay">
           <img src="weekly_img/week.jpg" id="week-overlay">
         </div>
@@ -26,7 +26,7 @@ layout: default
         {% include item_listings.html items=itemsLeft %}
       </div>
       <div class="middle-column">
-        <img src="circular_img/{{site.data.settings.middle_background}}">
+        <img src="{{site.data.settings.middle_background}}">
       </div>
       <div class="right-column shop-column">
         {% include item_listings.html items=itemsRight %}
