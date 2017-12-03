@@ -1,6 +1,4 @@
 ---
-pages:
-- _shop/test123.md
 hide_body: true
 fields:
 - name: name
