@@ -15,7 +15,7 @@ fields:
     min: '0.00'
     step: ".01"
     required: true
-  default: '0.07'
+  default: '0.00'
 - name: ad_image
   label: Ad image
   type: file
@@ -33,7 +33,6 @@ fields:
     required: true
     min: '0'
     step: '1'
-  default: '3'
   description: Must be unique for each item.
 - type: select
   name: column
@@ -50,5 +49,7 @@ fields:
   name: order
   label: Order
   description: Ordering in each column
+  default: '0'
   config:
+    step: '1'
     required: true
