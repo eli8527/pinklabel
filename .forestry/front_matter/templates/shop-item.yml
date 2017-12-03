@@ -1,4 +1,6 @@
 ---
+pages:
+- _shop/item-1.md
 hide_body: true
 fields:
 - name: name
