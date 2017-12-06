@@ -28,15 +28,21 @@ $(function() {
       .on('mousemove', handle_dragging);
   }
 
-  $('.ad_images').each(function() {
-    var item_id = parseInt($(this).attr('id').substring(3));
+  // Set day
+  var imgDateStr = 'weekly_img/' + new Date().getDay() + '.jpg';
+  var imgDate = document.createElement('img');
+  imgDate.setAttribute('src', imgDateStr);
+  $(imgDate).appendTo($('#week-overlay'));
+
+  $('.listing_images').each(function() {
+    var item_name = $(this).attr('id').substring(2);
     var item_img = items.filter(function(item) {
-      if (item.item_id === item_id)
+      var itemSlug = slugify(item.name)
+      if (itemSlug === item_name)
         return true;
     })[0].image;
 
     $(this).click(function(e) {
-      console.log([e.clientX, e.clientY]);
         var floater = document.createElement('div');
           $(floater).addClass('floater')
             .addClass('floater')
@@ -74,18 +80,19 @@ $(function() {
 
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
-      var item_id = item.item_id;
+      var item_slug = slugify(item.name);
+      // var item_id = item.item_id;
 
-      var quantity = $('#qty_' + item_id).val();
+      var quantity = $('#qty_' + item_slug).val();
       var total = quantity * item.cost;
       total = Math.round(total * 100) / 100;
       grandTotal += total;
 
-      total = total > 0 ? total : '';
-      $('#total_' + item_id).val(total);
+      total = total > 0 ? total.toFixed(2) : '';
+      $('#total_' + item_slug).val(total);
     }
 
-    grandTotal = grandTotal > 0 ? grandTotal : '';
+    grandTotal = grandTotal > 0 ? grandTotal.toFixed(2) : '';
     $('#grandtotal').val(grandTotal);
   }
 
@@ -95,5 +102,14 @@ $(function() {
     e.cancelBubble=true;
     e.returnValue=false;
     return false;
-}
+  }
+
+  // Meant to mimic Jekyll's slugify function
+  // https://github.com/jekyll/jekyll/blob/master/lib/jekyll/utils.rb#L142
+  function slugify (text) {
+    return text.toString().toLowerCase().trim()
+      .replace(/[^a-zA-Z0-9]/g, '-')  // Replace non-alphanumeric chars with -
+      .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+      .replace(/^\-|\-$/i, '')        // Remove leading/trailing hyphen
+  }
 });

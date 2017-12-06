@@ -42,7 +42,7 @@ body {
     user-select: none;          /* Likely future */
 
     div {
-      width: 100%;
+      // width: 100%;
       // background-color: magenta;
     }
 
@@ -51,28 +51,31 @@ body {
       vertical-align: top;
     }
 
-    .top-matter, .bottom-matter {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-
-      .top-left {
-        img {
-          height: 100%;
-        }
+    .top-matter {
+      display: flex;
+      flex-direction: row;
+      img {
+        height: 100%;
       }
-
       .top-right {
         position: relative;
-        width: 100%;
+        // width: 100%;
         #week-overlay {
+          height: auto;
           position: absolute;
-          width: 89.9%;
+          width: 79.7%;
           bottom: 0.5%;
-          left: 4.85%;
+          left: 9.82%;
           // right: 5.065%;
           opacity: 1.0;
         }
       }
+    }
+
+    .bottom-matter {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      opacity: 0;
     }
 
     .middle-matter {

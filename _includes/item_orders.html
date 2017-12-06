@@ -2,7 +2,7 @@
   <tr>
     {% assign itemSlug = item.name | slugify %}
     <td>{{item.name}}</td>
-    <td><input type="number" name="quantity" value="0" id="qty_{{item.item_id}}" onchange="updateFields();"></td>
-    <td><input type="number" name="total" id="total_{{item.item_id}}" readonly="readonly"></td>
+    <td><input type="number" name="quantity" value="0" id="qty_{{itemSlug}}" onchange="updateFields();"></td>
+    <td><input type="number" name="total" id="total_{{itemSlug}}" readonly="readonly"></td>
   </tr>
 {% endfor %}

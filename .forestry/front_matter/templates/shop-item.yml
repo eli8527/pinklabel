@@ -33,14 +33,6 @@ fields:
   type: file
   hidden: false
   default: ''
-- type: number
-  name: item_id
-  label: Item ID
-  config:
-    required: true
-    min: '0'
-    step: '1'
-  description: Must be unique for each item.
 - type: select
   name: column
   config:

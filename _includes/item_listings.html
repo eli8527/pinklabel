@@ -1,3 +1,4 @@
 {% for item in include.items %}
-  <img src="{{item.ad_image}}" id="ad_{{item.item_id}}" class="ad_images">
+  {% assign itemSlug = item.name | slugify %}
+  <img src="{{item.ad_image}}" id="l_{{itemSlug}}" class="listing_images">
 {% endfor %}
