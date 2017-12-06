@@ -1,8 +1,6 @@
 ---
 pages:
 - _shop/abc-book.md
-- _shop/banana-color.md
-- _shop/item-1.md
 hide_body: true
 fields:
 - name: name
