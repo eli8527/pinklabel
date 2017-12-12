@@ -4,6 +4,7 @@ $(function() {
   var items = {{ site.shop | jsonify }};
 
   $('.drag-bar').mousedown(handle_mousedown);
+
   function handle_mousedown(e){
     var mouse = {};
     mouse.x = e.pageX;
@@ -84,6 +85,11 @@ $(function() {
       // var item_id = item.item_id;
 
       var quantity = $('#qty_' + item_slug).val();
+      if (quantity === '' || quantity < 0)
+        quantity = 0;
+      quantity = Math.floor(quantity);
+      $('#qty_' + item_slug).val(quantity);
+
       var total = quantity * item.cost;
       total = Math.round(total * 100) / 100;
       grandTotal += total;
@@ -92,9 +98,109 @@ $(function() {
       $('#total_' + item_slug).val(total);
     }
 
-    grandTotal = grandTotal > 0 ? grandTotal.toFixed(2) : '';
+    if (grandTotal > 0) {
+      grandTotal = grandTotal.toFixed(2);
+      $('#paypal-button').removeClass('inactive');
+    }
+    else {
+
+      $('#paypal-button').addClass('inactive');
+      grandTotal = '';
+    }
     $('#grandtotal').val(grandTotal);
+
   }
+
+  paypal.Button.render({
+
+    env: 'production', // 'sandbox' or 'production',
+
+    client: {
+      sandbox:    'AXXqq8NpsoH47YrYC-E41yTj2EONqdHH7js-V6lIjlUi4-zEp8cF6kwLnPEEOvFvM0rPC3tn4v86cVfY',
+      production: 'AX6fs1KuxEHsCmxuRXgjb0Rgp05p-Fn91tKK-w-DVGaSXZEibemg2AWbYTjXaCifgzejWgMqzTpLt53Z'
+    },
+
+    commit: true, // Show a 'Pay Now' button
+
+    style: {
+      label: 'checkout',
+      tagline: false,
+      fundingicons: true, // optional
+      branding: true, // optional
+      size:  'small', // small | medium | large | responsive
+      shape: 'pill',   // pill | rect
+      color: 'gold'   // gold | blue | silve | black
+    },
+
+
+
+    payment: function(data, actions) {
+      var item_array = [];
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        var item_slug = slugify(item.name);
+
+        var quantity = $('#qty_' + item_slug).val();
+
+        if (quantity > 0) {
+          var item_obj = {}
+          item_obj.name = item.name;
+          item_obj.description = item.name;
+          item_obj.quantity = quantity + '';
+          item_obj.price = item.cost + '';
+          item_obj.tax = 0 + '';
+          item_obj.currency = 'USD';
+
+          item_array.push(item_obj);
+        }
+      }
+      console.log(item_array);
+
+      var total = $('#grandtotal').val();
+      console.log(total);
+      return actions.payment.create({
+        payment: {
+          intent: 'sale',
+          transactions: [
+            {
+              amount: {
+                total: total,
+                currency: 'USD'
+              },
+              item_list: {
+                items: item_array
+              }
+            }
+          ]
+        }
+     });
+        /*
+         * Set up the payment here
+         */
+    },
+
+    onAuthorize: function(data, actions) {
+      return actions.payment.execute().then(function() {
+                   console.log('payment complete');
+      });
+        /*
+         * Execute the payment here
+         */
+    },
+
+    onCancel: function(data, actions) {
+        /*
+         * Buyer cancelled the payment
+         */
+    },
+
+    onError: function(err) {
+        /*
+         * An error occurred during the transaction
+         */
+    }
+
+  }, '#paypal-button');
 
   function pauseEvent(e){
     if(e.stopPropagation) e.stopPropagation();
