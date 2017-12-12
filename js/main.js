@@ -108,7 +108,6 @@ $(function() {
       grandTotal = '';
     }
     $('#grandtotal').val(grandTotal);
-
   }
 
   paypal.Button.render({
@@ -181,7 +180,8 @@ $(function() {
 
     onAuthorize: function(data, actions) {
       return actions.payment.execute().then(function() {
-                   console.log('payment complete');
+        var confirm = "<h3>You've successfully made your payment!</h3>Your paypal receipt should be in your email. More details about your delivery will be sent to you in the next day or two. The product(s) will take approximately a week or two to ship. Thank you for your purchase.";
+        addTextFloater(confirm);
       });
         /*
          * Execute the payment here
@@ -195,12 +195,46 @@ $(function() {
     },
 
     onError: function(err) {
+      var error = '<h3>There was an error in processing your payment.</h3>Please try again later or contact us at <a href="mailto:heleinlinart@gmail.com">helenlinart@gmail.com</a> to troubleshoot.'
+      addTextFloater(error);
         /*
          * An error occurred during the transaction
          */
     }
 
   }, '#paypal-button');
+
+  function addTextFloater(text) {
+    var width = Math.random()*400+200;
+    var floater = document.createElement('div');
+      $(floater).addClass('floater')
+        .addClass('floater')
+        .width(width)
+        .offset({top: 0, left: 0})
+        .appendTo($('body'));
+
+    var drag = document.createElement('div');
+      $(drag).addClass('drag-bar')
+        .mousedown(handle_mousedown)
+        .appendTo(floater);
+
+    var close = document.createElement('img');
+    close.setAttribute('src', 'img/close-01.png');
+    close.setAttribute('width', '15px');
+    $(close).addClass('close')
+      .appendTo(drag);
+
+    var content = document.createElement('div');
+    $(content).addClass('floater-content')
+      .html(text)
+      .appendTo(floater);
+
+    $(close).click(function() {
+      $(floater).remove();
+    });
+
+    $(floater).offset({top: $(window).height()/2, left: $(window).width()/2-width/2});
+  }
 
   function pauseEvent(e){
     if(e.stopPropagation) e.stopPropagation();

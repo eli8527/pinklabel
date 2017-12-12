@@ -5,3 +5,4 @@
 
 - bottom part
 - mobile
+- deal with window scrolling bug in text floater
