@@ -6,6 +6,6 @@ order: 1
 date: 2017-12-05 22:02:01 +0000
 name: Learn Your ABC... Book
 ad_image: "/uploads/2017/12/06/item abc book.jpg"
-image: "/uploads/2017/12/06/etsyphoto-15.jpg"
+image: ''
 item_id: 101
 ---
