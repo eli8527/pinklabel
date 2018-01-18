@@ -8,5 +8,6 @@ $circular-background-image: "bg.jpg";
 $background-image: "table_bg.jpg";
 $gray: #888;
 @import
+  "include-media",
   "base"
   ;

@@ -22,7 +22,9 @@ body {
   justify-content: space-around;
 
   .circular {
-
+    @include media("<tablet") {
+      pointer-events: none;
+    }
     background-image: url("../circular_img/" + $circular-background-image);
     background-repeat: repeat-y;
     background-size: contain;
@@ -111,6 +113,12 @@ body {
 }
 
 .floater {
+  @include media("<tablet") {
+    position: static;
+    box-shadow: none;
+    width: 100vw !important;
+
+  }
   position: fixed;
   top: 5vh;
   right: 5vw;
