@@ -1,6 +1,6 @@
 ---
 title: abc book
-cost: 12
+cost: 15
 column: left
 order: 1
 date: 2017-12-05 22:02:01 +0000

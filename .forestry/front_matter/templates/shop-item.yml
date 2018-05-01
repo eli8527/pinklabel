@@ -1,13 +1,14 @@
 ---
 pages:
+- _shop/abc-book.md
 - _shop/ricebowl-sticker-red.md
 - _shop/ricebowl-sticker.md
 - _shop/paper-clip-necklace.md
 - _shop/banana-in-color.md
 - _shop/framed-disgust.md
 - _shop/fu-sticker.md
-- _shop/abc-book.md
 hide_body: true
+is_partial: false
 fields:
 - name: name
   label: Name
