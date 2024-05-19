@@ -16,8 +16,8 @@
 title: Pink Label
 description: > # this means to ignore newlines until "baseurl:"
   Unexpectedly relatable or simply emotionally distraught, Pink Label taps into the essence of who you are and supports it with content that you didn’t know you needed.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://pinklabel.shop" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/pinklabel" # the subpath of your site, e.g. /blog
+url: "https://eli8527.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 markdown: kramdown
